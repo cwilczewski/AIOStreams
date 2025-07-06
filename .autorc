@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "git-tag",
+    "all-contributors",
+    "first-time-contributor",
+    "released"
+  ],
+  "owner": "cwilczewski",
+  "repo": "AIOStreams",
+  "name": "cwilczewski",
+  "email": "chris.j.wilczewski@gmail.com",
+}
