@@ -1,3 +1,20 @@
+# v0.0.2 (Sun Jul 06 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Added deploy.yml file ([@cwilczewski](https://github.com/cwilczewski))
+- Added release.yml file ([@cwilczewski](https://github.com/cwilczewski))
+- Added deploy.sh file ([@cwilczewski](https://github.com/cwilczewski))
+- Added .autorc file ([@cwilczewski](https://github.com/cwilczewski))
+- Added amber.yaml secrets file ([@cwilczewski](https://github.com/cwilczewski))
+- Added flask quickstart ([@cwilczewski](https://github.com/cwilczewski))
+
+#### Authors: 1
+
+- Chris Wilczewski ([@cwilczewski](https://github.com/cwilczewski))
+
+---
+
 # v0.0.1 (Sun Jul 06 2025)
 
 :tada: This release contains work from new contributors! :tada:
