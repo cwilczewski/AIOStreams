@@ -1,31 +1,30 @@
-name: Release
+name: Cut Release
+permissions:
+    contents: write
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   release:
-    name: release
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: write
-      pull-requests: write
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
     steps:
-      - name: Release
-        id: release
-        uses: google-github-actions/release-please-action@v4
-        with:
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+      - uses: actions/checkout@v2
 
-      - name: Trigger Docker Image Publish
-        if: ${{ steps.release.outputs['release_created'] }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ steps.release.outputs.tag_name }}
+      - name: Prepare repository
+        run: git fetch --unshallow --tags
+
+      - name: Display the environment variables and their values
         run: |
-          gh workflow run --repo ${GITHUB_REPOSITORY} deploy-docker.yml -f ref=${TAG_NAME}
+          curl -L -o /tmp/auto.gz https://github.com/intuit/auto/releases/download/v11.1.6/auto-linux.gz
+          gzip -d /tmp/auto.gz
+          chmod +x /tmp/auto
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx /tmp/auto shipit
